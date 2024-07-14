@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holy Grail Layout</title>
+    <style>
+        body {
+            display: grid;
+            grid-template-areas: 
+                'header header header'
+                'left article right'
+                'footer footer footer';
+            grid-template-rows: 50px 1fr 50px;
+            grid-template-columns: 150px 1fr 150px;
+            height: 100vh;
+            margin: 0;
+        }
+        header { grid-area: header; background: #f3f3f3; text-align: center; }
+        aside#left { grid-area: left; background: #eaeaea; }
+        article { grid-area: article; background: #fff; }
+        aside#right { grid-area: right; background: #eaeaea; }
+        footer { grid-area: footer; background: #f3f3f3; text-align: center; }
+    </style>
+</head>
+<body>
+    <header>Header</header>
+    <aside id="left">Left Sidebar</aside>
+    <article>Article</article>
+    <aside id="right">Right Sidebar</aside>
+    <footer>Footer</footer>
+    <script>
+        async function fetchData() {
+            const response = await fetch('http://localhost:3000/data');
+            const data = await response.json();
+            document.querySelector('header').innerText = `Header: ${data.header}`;
+            document.querySelector('#left').innerText = `Left: ${data.left}`;
+            document.querySelector('article').innerText = `Article: ${data.article}`;
+            document.querySelector('#right').innerText = `Right: ${data.right}`;
+            document.querySelector('footer').innerText = `Footer: ${data.footer}`;
+        }
+
+        fetchData();
+    </script>
+</body>
+</html>
